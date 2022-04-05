@@ -1,23 +1,22 @@
-import { utils } from "ethers";
-import provider from "./Blockchain.provider";
+import { BigNumber } from "ethers";
+import { provider } from "./Blockchain.provider";
 
 /**
  * Get all accounts.
  *
- * @returns string[]
+ * @returns
  */
 async function getAccounts(): Promise<string[]> {
   return await provider.listAccounts();
 }
 
 /**
- * Get all accounts.
+ * Get account balance.
  *
- * @returns string[]
+ * @returns
  */
-async function getBalance(address: string): Promise<string> {
-  const balance = await provider.getBalance(address);
-  return `${utils.formatEther(balance)} ETH`;
+async function getBalance(address: string): Promise<BigNumber> {
+  return await provider.getBalance(address);
 }
 
 /**

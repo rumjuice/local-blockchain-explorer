@@ -6,7 +6,6 @@ body {
 }
 
 body .users-column {
-  display: inline-block;
   margin: 1rem;
   vertical-align: top;
 }
@@ -19,4 +18,5 @@ body .users-column .column-header {
 
 body .add-user-col input {
   margin-bottom: 10px;
+  width: 50%;
 }

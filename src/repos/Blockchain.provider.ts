@@ -1,5 +1,13 @@
-import { providers } from "ethers";
+import { providers, Wallet } from "ethers";
+import { BytesLike } from "ethers/lib/utils";
 
+// dotenv.config()
+
+// Connect to localhost:8545 blockchain
 const provider = new providers.JsonRpcProvider();
 
-export default provider;
+// Setup wallet to sign transaction
+// Private key is taken from the first account on the hardhat
+const wallet = new Wallet(process.env.PRIVATE_KEY as BytesLike, provider);
+
+export { provider, wallet };

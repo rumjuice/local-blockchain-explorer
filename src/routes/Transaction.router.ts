@@ -1,34 +1,29 @@
-import accountService from "@services/Account.service";
+import { SendTransactionParam } from "@models/Transaction.model";
+import TransactionService from "@services/Transaction.service";
 import { Request, Response, Router } from "express";
 import StatusCodes from "http-status-codes";
 
 // Constants
 const router = Router();
-const { CREATED, OK } = StatusCodes;
+const { CREATED, OK, INTERNAL_SERVER_ERROR } = StatusCodes;
 
 // Paths
 export const p = {
-  address: "/address",
-  balance: "/balance",
+  send: "/send",
 } as const;
 
 /**
- * Get all accounts.
+ * Send transaction
  */
-router.get(p.address, async (_: Request, res: Response) => {
-  const acc = await accountService.getAll();
-  return res.status(OK).json(acc);
-});
-
-/**
- * Get account balance.
- */
-router.get(
-  p.balance,
-  async (req: Request<{ address: string }>, res: Response) => {
-    const address = req.query.address;
-    const acc = await accountService.getBalance(address as string);
-    return res.status(OK).json(acc);
+router.post(
+  p.send,
+  async (req: Request<SendTransactionParam>, res: Response) => {
+    try {
+      const tx = await TransactionService.sendTransaction(req.body);
+      return res.status(CREATED).json(tx);
+    } catch (error) {
+      return res.status(INTERNAL_SERVER_ERROR).json(error);
+    }
   }
 );
 

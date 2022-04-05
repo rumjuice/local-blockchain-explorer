@@ -1,4 +1,5 @@
 import accountRepo from "@repos/Account.repo";
+import { utils } from "ethers";
 
 /**
  * Get all accounts.
@@ -15,8 +16,9 @@ function getAll(): Promise<string[]> {
  * @param address
  * @returns
  */
-function getBalance(address: string): Promise<string> {
-  return accountRepo.getBalance(address);
+async function getBalance(address: string): Promise<string> {
+  const balance = await accountRepo.getBalance(address);
+  return `${utils.formatEther(balance)} ETH`;
 }
 
 /**

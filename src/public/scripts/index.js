@@ -28,33 +28,24 @@ document.addEventListener(
   "click",
   function (event) {
     event.preventDefault();
-    var ele = event.target;
-    if (ele.matches("#add-user-btn")) {
-      addUser();
-    } else if (ele.matches(".edit-user-btn")) {
-      showEditView(ele.parentNode.parentNode);
-    } else if (ele.matches(".cancel-edit-btn")) {
-      cancelEdit(ele.parentNode.parentNode);
-    } else if (ele.matches(".submit-edit-btn")) {
-      submitEdit(ele);
-    } else if (ele.matches(".delete-user-btn")) {
-      deleteUser(ele);
+    var el = event.target;
+    if (el.matches("#send-btn")) {
+      sendTransaction();
     }
   },
   false
 );
 
-function addUser() {
-  var nameInput = document.getElementById("name-input");
-  var emailInput = document.getElementById("email-input");
+function sendTransaction() {
+  var to = document.getElementById("to-input");
+  var amount = document.getElementById("amount-input");
   var data = {
-    user: {
-      name: nameInput.value,
-      email: emailInput.value,
-    },
+    to: to.value,
+    value: amount.value.toString(),
   };
-  httpPost("/api/users/add", data).then(() => {
-    displayUsers();
+  httpPost("/api/transaction/send", data).then((res) => {
+    const el = document.getElementById("user-balance");
+    el.innerHTML = `Your balance: ${res}`;
   });
 }
 

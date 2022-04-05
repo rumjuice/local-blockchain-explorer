@@ -7,7 +7,7 @@ import StatusCodes from "http-status-codes";
 import logger from "jet-logger";
 import morgan from "morgan";
 import path from "path";
-import apiRouter from "./routes/api";
+import apiRouter from "./routes";
 
 // Initialize express
 const app = express();
