@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blockchain Explorer</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+</head>
+
+<body>
+
+    <!-- Add Users -->
+    <div class="users-column add-user-col">
+        <div class="column-header">Send transaction</div>
+        <div>
+            <input id="name-input" placeholder="To">
+        </div>
+        <div>
+            <input id="email-input" placeholder="Amount">
+        </div>
+        <div>
+            <button id="add-user-btn">Send</button>
+        </div>
+    </div>
+
+    <div class="users-column">
+        <div id="user-balance"></div>
+    </div>
+
+    <div class="users-column">
+        <div class="column-header">Accounts:</div>
+        <div id="users-body"></div>
+    </div>
+
+
+
+</body>
+<script src="scripts/index.js"></script>
+
+</html>

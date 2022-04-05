@@ -1,0 +1,22 @@
+body {
+  padding: 100px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+body .users-column {
+  display: inline-block;
+  margin: 1rem;
+  vertical-align: top;
+}
+
+body .users-column .column-header {
+  padding-bottom: 0.3rem;
+  font-weight: 700;
+  font-size: 1.2em;
+}
+
+body .add-user-col input {
+  margin-bottom: 10px;
+}
