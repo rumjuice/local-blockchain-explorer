@@ -47,44 +47,6 @@ function sendTransaction() {
     });
 }
 
-function showEditView(userEle) {
-  var normalView = userEle.getElementsByClassName("normal-view")[0];
-  var editView = userEle.getElementsByClassName("edit-view")[0];
-  normalView.style.display = "none";
-  editView.style.display = "block";
-}
-
-function cancelEdit(userEle) {
-  var normalView = userEle.getElementsByClassName("normal-view")[0];
-  var editView = userEle.getElementsByClassName("edit-view")[0];
-  normalView.style.display = "block";
-  editView.style.display = "none";
-}
-
-function submitEdit(ele) {
-  var userEle = ele.parentNode.parentNode;
-  var nameInput = userEle.getElementsByClassName("name-edit-input")[0];
-  var emailInput = userEle.getElementsByClassName("email-edit-input")[0];
-  var id = ele.getAttribute("data-user-id");
-  var data = {
-    user: {
-      name: nameInput.value,
-      email: emailInput.value,
-      id: Number(id),
-    },
-  };
-  httpPut("/api/users/update", data).then(() => {
-    displayUsers();
-  });
-}
-
-function deleteUser(ele) {
-  var id = ele.getAttribute("data-user-id");
-  httpDelete("/api/users/delete/" + id).then(() => {
-    displayUsers();
-  });
-}
-
 function httpGet(path) {
   return fetch(path, getOptions("GET"));
 }

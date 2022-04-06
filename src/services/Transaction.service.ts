@@ -10,11 +10,14 @@ import { utils } from "ethers";
  * @returns
  */
 async function sendTransaction(params: SendTransactionParam): Promise<string> {
+  // Parse value from ether to wei
   const param = { ...params, value: utils.parseEther(params.value) };
 
   try {
+    // Send transaction to blockchain
     const send = await TransactionRepo.sendTransaction(param);
-    const save = await TransactionRepo.saveTransaction({
+    // Save transaction to mongodb
+    await TransactionRepo.saveTransaction({
       source: send.from,
       destination: send.to,
       amount: param.value,
@@ -22,19 +25,19 @@ async function sendTransaction(params: SendTransactionParam): Promise<string> {
       gasUsed: send.gasUsed.toNumber(),
       receiptHash: send.transactionHash,
     });
-    console.log(save);
-
+    // Return sender balance
     const balance = await wallet.getBalance();
     return `${utils.formatEther(balance)} ETH`;
   } catch (error) {
+    // Save failed transaction to mongodb
     const from = await wallet.getAddress();
-    const save = await TransactionRepo.saveTransaction({
+    await TransactionRepo.saveTransaction({
       source: from,
       destination: param.to,
       amount: param.value,
       status: Status.FAILED,
     });
-    console.log("error", save);
+
     throw new Error(error);
   }
 }

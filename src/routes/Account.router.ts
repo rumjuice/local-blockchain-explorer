@@ -4,7 +4,7 @@ import StatusCodes from "http-status-codes";
 
 // Constants
 const router = Router();
-const { CREATED, OK } = StatusCodes;
+const { OK, BAD_REQUEST } = StatusCodes;
 
 // Paths
 export const p = {
@@ -16,7 +16,7 @@ export const p = {
  * Get all accounts.
  */
 router.get(p.address, async (_: Request, res: Response) => {
-  const acc = await accountService.getAll();
+  const acc = await accountService.getAccounts();
   return res.status(OK).json(acc);
 });
 
@@ -27,57 +27,12 @@ router.get(
   p.balance,
   async (req: Request<{ address: string }>, res: Response) => {
     const address = req.query.address;
-    const acc = await accountService.getBalance(address as string);
-    return res.status(OK).json(acc);
+    if (address) {
+      const acc = await accountService.getBalance(address as string);
+      return res.status(OK).json(acc);
+    }
+    return res.status(BAD_REQUEST).json("Address param is missing");
   }
 );
 
-// const tx = signer.sendTransaction({
-//   to: "ricmoo.firefly.eth",
-//   value: ethers.utils.parseEther("1.0")
-// });
-
-/**
- * Add one user.
- */
-// router.post(p.add, async (req: Request, res: Response) => {
-//   const { user } = req.body;
-//   // Check param
-//   if (!user) {
-//     throw new ParamMissingError();
-//   }
-//   // Fetch data
-//   await userService.addOne(user);
-//   return res.status(CREATED).end();
-// });
-
-/**
- * Update one user.
- */
-// router.put(p.update, async (req: Request, res: Response) => {
-//   const { user } = req.body;
-//   // Check param
-//   if (!user) {
-//     throw new ParamMissingError();
-//   }
-//   // Fetch data
-//   await userService.updateOne(user);
-//   return res.status(OK).end();
-// });
-
-/**
- * Delete one user.
- */
-// router.delete(p.delete, async (req: Request, res: Response) => {
-//   const { id } = req.params;
-//   // Check param
-//   if (!id) {
-//     throw new ParamMissingError();
-//   }
-//   // Fetch data
-//   await userService.delete(Number(id));
-//   return res.status(OK).end();
-// });
-
-// Export default
 export default router;
