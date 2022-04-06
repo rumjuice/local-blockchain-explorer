@@ -20,7 +20,6 @@ router.post(
   async (req: Request<SendTransactionParam>, res: Response) => {
     try {
       const tx = await TransactionService.sendTransaction(req.body);
-      console.log("return", tx);
       return res.status(CREATED).json(tx);
     } catch (error) {
       return res.status(INTERNAL_SERVER_ERROR).json(error);
