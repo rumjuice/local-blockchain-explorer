@@ -5,7 +5,7 @@ import StatusCodes from "http-status-codes";
 
 // Constants
 const router = Router();
-const { CREATED, OK, INTERNAL_SERVER_ERROR } = StatusCodes;
+const { CREATED, INTERNAL_SERVER_ERROR } = StatusCodes;
 
 // Paths
 export const p = {
@@ -20,6 +20,7 @@ router.post(
   async (req: Request<SendTransactionParam>, res: Response) => {
     try {
       const tx = await TransactionService.sendTransaction(req.body);
+      console.log("return", tx);
       return res.status(CREATED).json(tx);
     } catch (error) {
       return res.status(INTERNAL_SERVER_ERROR).json(error);

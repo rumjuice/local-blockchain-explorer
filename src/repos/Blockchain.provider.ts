@@ -1,8 +1,6 @@
 import { providers, Wallet } from "ethers";
 import { BytesLike } from "ethers/lib/utils";
 
-// dotenv.config()
-
 // Connect to localhost:8545 blockchain
 const provider = new providers.JsonRpcProvider();
 

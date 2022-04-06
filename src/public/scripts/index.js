@@ -20,10 +20,6 @@ function accComponent(acc) {
   return `<ul><li>${acc}</li></ul>`;
 }
 
-/******************************************************************************
- *                        Add, Edit, and Delete Users
- ******************************************************************************/
-
 document.addEventListener(
   "click",
   function (event) {
@@ -43,10 +39,12 @@ function sendTransaction() {
     to: to.value,
     value: amount.value.toString(),
   };
-  httpPost("/api/transaction/send", data).then((res) => {
-    const el = document.getElementById("user-balance");
-    el.innerHTML = `Your balance: ${res}`;
-  });
+  httpPost("/api/transaction/send", data)
+    .then((response) => response.json())
+    .then((res) => {
+      const el = document.getElementById("user-balance");
+      el.innerHTML = `Your balance is: ${res}`;
+    });
 }
 
 function showEditView(userEle) {
