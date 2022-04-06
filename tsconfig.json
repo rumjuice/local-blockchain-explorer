@@ -18,6 +18,7 @@
       "@repos/*": ["src/repos/*"],
       "@models/*": ["src/models/*"],
       "@services/*": ["src/services/*"],
+      "@shared/*": ["src/shared/*"],
       "@routes/*": ["src/routes/*"]
     },
     "useUnknownInCatchVariables": false
