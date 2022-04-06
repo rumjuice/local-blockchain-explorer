@@ -9,7 +9,7 @@
     "prestart": "yarn",
     "build": "./node_modules/.bin/ts-node build.ts",
     "lint": "eslint . --ext .ts",
-    "start": "yarn build && yarn hardhat:node & node -r module-alias/register ./dist --env=production",
+    "start": "yarn build && node -r module-alias/register ./dist --env=production",
     "start:dev": "nodemon",
     "hardhat:node": "npx hardhat node"
   },
