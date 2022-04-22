@@ -1,7 +1,7 @@
-import { SendTransactionParam, Status } from "@models/Transaction.model";
-import { wallet } from "@repos/Blockchain.provider";
-import TransactionRepo from "@repos/Transaction.repo";
-import { utils } from "ethers";
+import {SendTransactionParam, Status} from '@models/Transaction.model';
+import {wallet} from '@repos/Blockchain.provider';
+import TransactionRepo from '@repos/Transaction.repo';
+import {utils} from 'ethers';
 
 /**
  * Send transaction
@@ -11,7 +11,7 @@ import { utils } from "ethers";
  */
 async function sendTransaction(params: SendTransactionParam): Promise<string> {
   // Parse value from ether to wei
-  const param = { ...params, value: utils.parseEther(params.value) };
+  const param = {...params, value: utils.parseEther(params.value)};
 
   try {
     // Send transaction to blockchain
@@ -42,4 +42,4 @@ async function sendTransaction(params: SendTransactionParam): Promise<string> {
   }
 }
 
-export default { sendTransaction } as const;
+export default {sendTransaction} as const;

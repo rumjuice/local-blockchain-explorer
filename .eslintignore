@@ -5,3 +5,4 @@ coverage
 apps/api/dist
 apps/api/src/public/
 apps/api/build.ts
+tsconfig.json

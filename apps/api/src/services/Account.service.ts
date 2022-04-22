@@ -1,5 +1,5 @@
-import accountRepo from "@repos/Account.repo";
-import { utils } from "ethers";
+import accountRepo from '@repos/Account.repo';
+import {utils} from 'ethers';
 
 /**
  * Get all accounts.
