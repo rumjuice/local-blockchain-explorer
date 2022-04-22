@@ -1,6 +1,6 @@
 # Blockchain Explorer
 
-## Full Stack 1 Final Assignment
+## Full Stack 2 Final Assignment
 
 Author:
 
