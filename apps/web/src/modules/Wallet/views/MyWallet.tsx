@@ -33,7 +33,7 @@ const MyWallet: FC = () => {
   }, []);
 
   return (
-    <div className="divide-y rounded-xl shadow-md p-4 bg-white">
+    <div className="rounded-xl shadow-md p-4 bg-white">
       <div className="flex flex-col gap-2 items-center">
         <div className="font-semibold">My Address:</div>
         <div className="text-sm">{address}</div>
@@ -43,7 +43,7 @@ const MyWallet: FC = () => {
           className="inline-flex justify-center px-4 py-2 mt-2 text-sm font-medium text-sky-900 bg-sky-100 border border-transparent rounded-md hover:bg-sky-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
           onClick={connect}
           disabled={connected}>
-          Connect to Metamask
+          {connected ? 'Connected' : 'Connect to Metamask'}
         </button>
       </div>
     </div>
