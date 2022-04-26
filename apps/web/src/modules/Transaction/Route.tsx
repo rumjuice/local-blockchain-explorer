@@ -1,9 +1,7 @@
 import {RouteObject} from 'react-router-dom';
+import {TransactionPath} from './Types';
 import TransactionHistory from './views';
 
-export enum TransactionPath {
-  History = '/transaction',
-}
 const TransactionRoutes: RouteObject[] = [
   {
     path: TransactionPath.History,

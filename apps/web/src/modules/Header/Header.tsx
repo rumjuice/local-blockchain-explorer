@@ -1,6 +1,8 @@
 import {Tab} from '@headlessui/react';
 import {FC} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {TransactionTab} from '../Transaction/Types';
+import {WalletTab} from '../Wallet/Types';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -9,21 +11,13 @@ function classNames(...classes: string[]) {
 const Header: FC = () => {
   // TODO put this on each module
   const tabs = [
-    {
-      id: 1,
-      title: 'Transactions',
-      route: '/transaction',
-    },
+    TransactionTab,
     {
       id: 2,
       title: 'Addresses',
       route: '/address',
     },
-    {
-      id: 3,
-      title: 'Wallet',
-      route: '/wallet',
-    },
+    WalletTab,
   ];
 
   const navigate = useNavigate();
@@ -38,10 +32,10 @@ const Header: FC = () => {
         <Tab.List className="flex p-1 space-x-1 bg-sky-600 rounded-xl">
           {tabs.map((tab) => (
             <Tab
-              key={tab.id}
+              key={tab.route}
               className={({selected}) =>
                 classNames(
-                  'w-full py-2.5 text-sm leading-5 font-medium text-sky-700 rounded-lg',
+                  'w-full py-2.5 leading-5 font-medium text-sky-700 rounded-lg',
                   'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-sky-400 ring-white ring-opacity-60',
                   selected
                     ? 'bg-white shadow'

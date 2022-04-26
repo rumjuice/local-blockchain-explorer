@@ -1,7 +1,6 @@
 import ky from 'ky';
 import {BASE_URL} from '../../../Config';
-import {TransactionPath} from '../Route';
-import {Receipt} from '../Types';
+import {Receipt, TransactionPath} from '../Types';
 
 /**
  * Get all transactions.

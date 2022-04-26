@@ -3,6 +3,9 @@ export enum Status {
   SUCCESS = 'SUCCESS',
   FAILED = 'FAILED',
 }
+export enum TransactionPath {
+  History = '/transaction',
+}
 export type Receipt = {
   source: string;
   destination: string;
@@ -13,4 +16,8 @@ export type Receipt = {
   blockHash?: string;
   gasUsed?: number;
   receiptHash?: string;
+};
+export const TransactionTab = {
+  route: TransactionPath.History,
+  title: 'Transactions',
 };

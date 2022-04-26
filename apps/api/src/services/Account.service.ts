@@ -18,7 +18,7 @@ function getAccounts(): Promise<string[]> {
  */
 async function getBalance(address: string): Promise<string> {
   const balance = await accountRepo.getBalance(address);
-  return `${utils.formatEther(balance)} ETH`;
+  return utils.formatEther(balance);
 }
 
 export default {

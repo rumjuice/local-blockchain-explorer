@@ -10,7 +10,7 @@ interface SectionProps {
 const Section: FC<SectionProps> = ({title, value}): ReactElement => {
   return (
     <div className="flex flex-row text-sm gap-4 items-center space-y-1 py-2">
-      <div className="w-16 font-medium">{title}:</div>
+      <div className="basis-20 font-medium">{title}:</div>
       <div>{value}</div>
     </div>
   );

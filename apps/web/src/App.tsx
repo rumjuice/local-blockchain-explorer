@@ -1,19 +1,19 @@
 import {Navigate, Route, RouteObject, Routes} from 'react-router-dom';
 import Header from './modules/Header';
-import TransactionRoutes, {TransactionPath} from './modules/Transaction/Route';
+import TransactionRoutes from './modules/Transaction/Route';
+import {TransactionPath} from './modules/Transaction/Types';
+import WalletRoutes from './modules/Wallet/Route';
 
 function App() {
-  const routes: RouteObject[] = [...TransactionRoutes];
+  const routes: RouteObject[] = [...TransactionRoutes, ...WalletRoutes];
 
   return (
-    <div className="flex flex-col justify-center items-center h-full w-screen overflow-auto bg-slate-50 pb-4">
+    <div className="flex flex-col items-center h-screen w-screen overflow-auto bg-slate-50 pb-4">
       <div className="my-4 text-xl italic font-bold text-sky-900">
         Blockchain Explorer
       </div>
-      <div className="container-lg w-full max-w-max max-h-max">
-        {/* header */}
+      <div className="container-lg w-full md:w-3/4 lg:w-3/5 max-h-max">
         <Header />
-        {/* body */}
         <div className="flex flex-col gap-4">
           <Routes>
             {routes.map((route) => (
