@@ -21,7 +21,7 @@ const TransactionHistory: FC = () => {
   return (
     <>
       {history ? (
-        history.map((h) => <TransactionReceipt key={h.receiptHash} {...h} />)
+        history.map((h, i) => <TransactionReceipt key={i} {...h} />)
       ) : (
         <div>Fetching data...</div>
       )}

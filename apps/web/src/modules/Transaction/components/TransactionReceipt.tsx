@@ -24,6 +24,8 @@ const TransactionReceipt: FC<Receipt> = ({
   destination,
   amount,
   gasUsed,
+  block,
+  blockHash,
 }) => {
   return (
     <div className="divide-y rounded-xl shadow-md p-4 bg-white">
@@ -33,6 +35,8 @@ const TransactionReceipt: FC<Receipt> = ({
         {timestamp && (
           <Section title="Date" value={new Date(timestamp).toLocaleString()} />
         )}
+        {block && <Section title="Block" value={block} />}
+        {blockHash && <Section title="Block Hash" value={blockHash} />}
       </div>
       <div className="py-2">
         <Section title="From" value={source} />
@@ -41,7 +45,9 @@ const TransactionReceipt: FC<Receipt> = ({
       <div className="pt-2">
         <Section
           title="Value"
-          value={`${utils.formatEther(amount.toString())} ETH`}
+          value={`${utils.formatEther(
+            amount.toLocaleString('en-us', {useGrouping: false}),
+          )} ETH`}
         />
         {gasUsed && <Section title="Gas" value={gasUsed} />}
       </div>
