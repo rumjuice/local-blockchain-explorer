@@ -12,12 +12,12 @@ const Header: FC = () => {
     {
       id: 1,
       title: 'Transactions',
-      route: '/transactions',
+      route: '/transaction',
     },
     {
       id: 2,
       title: 'Addresses',
-      route: '/addresses',
+      route: '/address',
     },
     {
       id: 3,
@@ -33,7 +33,7 @@ const Header: FC = () => {
   };
 
   return (
-    <div className="w-full mb-4">
+    <div className="w-full">
       <Tab.Group onChange={handleTabs}>
         <Tab.List className="flex p-1 space-x-1 bg-sky-600 rounded-xl">
           {tabs.map((tab) => (

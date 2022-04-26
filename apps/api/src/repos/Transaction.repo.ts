@@ -1,11 +1,31 @@
-import { TransactionReceipt } from "@ethersproject/abstract-provider";
+import {Block, TransactionReceipt} from '@ethersproject/abstract-provider';
 import {
   SendTransaction,
   Transaction,
   TransactionSchema,
-} from "@models/Transaction.model";
-import { Document } from "mongoose";
-import { provider, wallet } from "./Blockchain.provider";
+} from '@models/Transaction.model';
+import {Document} from 'mongoose';
+import {provider, wallet} from './Blockchain.provider';
+
+/**
+ * Get transaction history.
+ *
+ * @returns
+ */
+async function getTransactionHistory(): Promise<TransactionSchema[]> {
+  const query = await Transaction.find().sort({_id: -1});
+  return query;
+}
+
+/**
+ * Get block detail.
+ *
+ * @returns
+ */
+async function getBlock(params: number): Promise<Block> {
+  const block = await provider.getBlock(params);
+  return block;
+}
 
 /**
  * Send transaction.
@@ -14,7 +34,7 @@ import { provider, wallet } from "./Blockchain.provider";
  * @returns
  */
 async function sendTransaction(
-  params: SendTransaction
+  params: SendTransaction,
 ): Promise<TransactionReceipt> {
   // Create transaction on blockchain
   const send = await wallet.sendTransaction(params);
@@ -42,4 +62,9 @@ async function saveTransaction(params: TransactionSchema): Promise<Document> {
     throw new Error(error);
   }
 }
-export default { sendTransaction, saveTransaction } as const;
+export default {
+  getTransactionHistory,
+  getBlock,
+  sendTransaction,
+  saveTransaction,
+} as const;

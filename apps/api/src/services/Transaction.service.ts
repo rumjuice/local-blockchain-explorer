@@ -1,7 +1,24 @@
-import {SendTransactionParam, Status} from '@models/Transaction.model';
+import {
+  SendTransactionParam,
+  Status,
+  TransactionSchema,
+} from '@models/Transaction.model';
 import {wallet} from '@repos/Blockchain.provider';
 import TransactionRepo from '@repos/Transaction.repo';
 import {utils} from 'ethers';
+
+/**
+ * Get transaction history
+ *
+ * @returns
+ */
+async function getTransactionHistory(): Promise<TransactionSchema[]> {
+  try {
+    return await TransactionRepo.getTransactionHistory();
+  } catch (error) {
+    throw new Error(error);
+  }
+}
 
 /**
  * Send transaction
@@ -9,25 +26,33 @@ import {utils} from 'ethers';
  * @param params
  * @returns
  */
-async function sendTransaction(params: SendTransactionParam): Promise<string> {
+async function sendTransaction(
+  params: SendTransactionParam,
+): Promise<TransactionSchema> {
   // Parse value from ether to wei
   const param = {...params, value: utils.parseEther(params.value)};
 
   try {
     // Send transaction to blockchain
     const send = await TransactionRepo.sendTransaction(param);
-    // Save transaction to mongodb
-    await TransactionRepo.saveTransaction({
+    // Get block timestamp
+    const block = await TransactionRepo.getBlock(send.blockNumber);
+
+    const receipt = {
       source: send.from,
       destination: send.to,
       amount: param.value,
       status: Status.SUCCESS,
+      timestamp: block.timestamp * 1000,
       gasUsed: send.gasUsed.toNumber(),
       receiptHash: send.transactionHash,
-    });
-    // Return sender balance
-    const balance = await wallet.getBalance();
-    return `${utils.formatEther(balance)} ETH`;
+      block: send.blockNumber,
+      blockHash: block.hash,
+    };
+    // Save transaction to mongodb
+    await TransactionRepo.saveTransaction(receipt);
+    // return tx receipt
+    return {...receipt, amount: parseInt(param.value.toString())};
   } catch (error) {
     // Save failed transaction to mongodb
     const from = await wallet.getAddress();
@@ -35,6 +60,7 @@ async function sendTransaction(params: SendTransactionParam): Promise<string> {
       source: from,
       destination: param.to,
       amount: param.value,
+      timestamp: Date.now(),
       status: Status.FAILED,
     });
 
@@ -42,4 +68,4 @@ async function sendTransaction(params: SendTransactionParam): Promise<string> {
   }
 }
 
-export default {sendTransaction} as const;
+export default {getTransactionHistory, sendTransaction} as const;

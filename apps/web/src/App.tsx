@@ -1,26 +1,20 @@
-import {Route, RouteObject, Routes} from 'react-router-dom';
-import logo from './logo.svg';
+import {Navigate, Route, RouteObject, Routes} from 'react-router-dom';
 import Header from './modules/Header';
+import TransactionRoutes, {TransactionPath} from './modules/Transaction/Route';
 
 function App() {
-  const routes: RouteObject[] = [
-    {
-      path: '/transaction',
-      // element: <Login />,
-    },
-  ];
+  const routes: RouteObject[] = [...TransactionRoutes];
 
   return (
-    <div className="flex justify-center items-center h-screen w-screen">
-      <div className="absolute top-5 text-xl italic font-bold text-sky-900">
-        {' '}
+    <div className="flex flex-col justify-center items-center h-full w-screen overflow-auto bg-slate-50 pb-4">
+      <div className="my-4 text-xl italic font-bold text-sky-900">
         Blockchain Explorer
       </div>
-      <div className="container-lg w-3/5 max-w-lg rounded-xl border-2 shadow">
+      <div className="container-lg w-full max-w-max max-h-max">
         {/* header */}
         <Header />
         {/* body */}
-        <div className="p-4">
+        <div className="flex flex-col gap-4">
           <Routes>
             {routes.map((route) => (
               <Route
@@ -29,21 +23,11 @@ function App() {
                 element={route.element}
               />
             ))}
+            <Route
+              path="*"
+              element={<Navigate to={TransactionPath.History} replace />}
+            />
           </Routes>
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <input disabled={false} />
-            <p>
-              Edit <code>src/App.tsx</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer">
-              Learn React
-            </a>
-          </header>
         </div>
       </div>
     </div>
