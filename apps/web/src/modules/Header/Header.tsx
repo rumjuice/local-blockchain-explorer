@@ -1,6 +1,7 @@
 import {Tab} from '@headlessui/react';
 import {FC} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {AccountTab} from '../Account/Types';
 import {TransactionTab} from '../Transaction/Types';
 import {WalletTab} from '../Wallet/Types';
 
@@ -9,16 +10,7 @@ function classNames(...classes: string[]) {
 }
 
 const Header: FC = () => {
-  // TODO put this on each module
-  const tabs = [
-    TransactionTab,
-    {
-      id: 2,
-      title: 'Addresses',
-      route: '/address',
-    },
-    WalletTab,
-  ];
+  const tabs = [TransactionTab, AccountTab, WalletTab];
 
   const navigate = useNavigate();
 

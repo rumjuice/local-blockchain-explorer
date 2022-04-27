@@ -1,11 +1,11 @@
 import {RouteObject} from 'react-router-dom';
 import {WalletPath} from './Types';
-import Wallet from './views/MyWallet';
+import MyWallet from './views';
 
 const WalletRoutes: RouteObject[] = [
   {
     path: WalletPath.Home,
-    element: <Wallet />,
+    element: <MyWallet />,
   },
 ];
 export default WalletRoutes;
