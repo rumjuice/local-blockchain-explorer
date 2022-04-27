@@ -13,13 +13,24 @@ George Brown College
 ## Instruction
 
 - Make sure that your MongoDB instance is running
-- Make sure that your hardhat node is running
-  - if not, run `npx hardhat node`
-- run `yarn start`
-- open `localhost:8080` on your browser
+- run `yarn start` (this will run frontend, api, and hardhat node)
 
 ## Project description
 
-- Created using TypeScript Express, Mongoose, and Hardhat
-- You can use Postman to test the get balance by address api
-  - `localhost:8080/api/account/balance?address={address}`
+Yarn workspace (mono-repo) project structure
+
+### Front-end
+
+- React TypeScript, ky, formik, Tailwind
+
+### Back-end
+
+- Node TypeScript, Express, Mongoose, and Hardhat
+
+### Notes
+
+There are some changes in backend:
+
+- Add list transaction route
+- Ability to handle ultra long integer (wei)
+- Adjust send transaction api
