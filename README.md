@@ -1,10 +1,10 @@
 # Blockchain Explorer
 
-## Full Stack 2 Final Assignment
+Explore and do transactions on local blockchain (hardhat)
 
-Author:
+### As part of Full Stack 2 Final Assignment
 
-- Ramdhani Rachmansyah -- 101391780
+Author: **Ramdhani Rachmansyah -- 101391780**
 
 George Brown College
 
@@ -15,9 +15,15 @@ George Brown College
 - Make sure that your MongoDB instance is running
 - run `yarn start` (this will run frontend, api, and hardhat node)
 
-## Project description
+## Project features
 
-Yarn workspace (mono-repo) project structure
+1. List all transactions
+2. List all nodes in the network
+3. Send ETH to one of the nodes or address
+4. View balance of wallet (can be connected to Metamask)
+5. Project structured using Yarn workspace (mono-repo)
+
+## Stack
 
 ### Front-end
 
@@ -25,7 +31,9 @@ Yarn workspace (mono-repo) project structure
 
 ### Back-end
 
-- Node TypeScript, Express, Mongoose, and Hardhat
+- Node TypeScript, Express, Mongoose, Hardhat
+
+---
 
 ### Notes
 
